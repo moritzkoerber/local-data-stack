@@ -1,2 +1,2 @@
 SELECT *
-FROM {{ source("raw_data", "area1") }}
+FROM {{ source("area1", "area1") }}

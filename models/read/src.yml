@@ -6,8 +6,14 @@ sources:
       - name: area1
         description: "Raw input data"
         meta:
-          external_location: "data/*.parquet"
+          external_location: "data/area1_small.parquet"
         columns:
           - name: Z
             tests:
               - not_null
+  - name: area1
+    tables:
+      - name: area1
+        meta:
+          dagster:
+            asset_key: ["area1"]
