@@ -12,6 +12,7 @@ sources:
             tests:
               - not_null
   - name: area1
+    schema: local
     tables:
       - name: area1
         meta:

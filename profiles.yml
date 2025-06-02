@@ -2,7 +2,7 @@ duckdb:
   outputs:
     dev:
       type: duckdb
-      path: ":memory:"
+      path: "db.db"
       # plugins:
       #   - module: delta
   target: dev
