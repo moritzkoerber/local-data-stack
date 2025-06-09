@@ -1,4 +1,11 @@
-from dagster import AssetExecutionContext, asset
+"""This file defines the data assets for your Dagster project, specifying how they are computed and managed.
+Software defined assets are the main building blocks in Dagster. An asset is composed of three components:
+
+Asset key or unique identifier.
+An op which is a function that is invoked to produce the asset.
+Upstream dependencies that the asset depends on."""
+
+from dagster import AssetCheckResult, AssetExecutionContext, asset, asset_check
 from dagster_dbt import DbtCliResource, dbt_assets
 from dagster_duckdb import DuckDBResource
 
@@ -22,6 +29,7 @@ def area1(context: AssetExecutionContext, duckdb: DuckDBResource) -> None:
         context.add_output_metadata({"num_rows": result[0]})
 
 
+# A Dagster asset that, when materialized, will execute dbt build for the specified dbt project, effectively running all your dbt models and tests.
 @dbt_assets(manifest=local_dagster.manifest_path)
 def local_dagster_assets(context: AssetExecutionContext, dbt: DbtCliResource):
     yield from dbt.cli(["build"], context=context).stream()

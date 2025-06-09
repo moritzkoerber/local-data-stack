@@ -1,3 +1,5 @@
+"""This module defines and prepares a DbtProject object, making a dbt project accessible and usable within Dagster."""
+
 from pathlib import Path
 
 from dagster_dbt import DbtProject
