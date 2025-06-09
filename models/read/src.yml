@@ -18,3 +18,10 @@ sources:
         meta:
           dagster:
             asset_key: ["area1"]
+  - name: covid19
+    schema: local
+    tables:
+      - name: covid19_data_rki
+        meta:
+          dagster:
+            asset_key: ["covid19_data_rki"]

@@ -3,10 +3,10 @@
 from dagster import AssetSelection, ScheduleDefinition
 from dagster_dbt import build_schedule_from_dbt_selection
 
-from .assets import local_dagster_assets
+from .assets import dbt_assets
 
 dbt_schedule = build_schedule_from_dbt_selection(
-    [local_dagster_assets],
+    [dbt_assets],
     job_name="materialize_dbt_models",
     cron_schedule="0 11 * * *",
     dbt_select="fqn:*",
