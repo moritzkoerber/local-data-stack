@@ -7,3 +7,5 @@ logs/
 .tmp*
 *.pyc
 *.egg-info
+*.duckdb
+.venv
