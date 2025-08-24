@@ -3,7 +3,7 @@
 from dagster import AssetSelection, ScheduleDefinition
 from dagster_dbt import build_schedule_from_dbt_selection
 
-from .assets import dbt_assets
+from .assets.dbt import dbt_assets
 
 dbt_schedule = build_schedule_from_dbt_selection(
     [dbt_assets],
@@ -15,7 +15,7 @@ dbt_schedule = build_schedule_from_dbt_selection(
 
 daily_update_schedule = ScheduleDefinition(
     name="daily_update_covid19_data_rki",
-    target=AssetSelection.keys("covid19_data_rki").upstream(),
+    target=AssetSelection.assets(["bronze", "covid19_data_rki"]),
     cron_schedule="0 0 * * *",
 )
 

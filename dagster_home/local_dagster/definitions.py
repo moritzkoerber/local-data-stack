@@ -4,19 +4,14 @@ from dagster import Definitions
 from dagster_dbt import DbtCliResource
 from dagster_duckdb import DuckDBResource
 
-from .assets import (
-    area1,
-    area1_label_check,
-    cases_histogram,
-    covid19_data_rki,
-    dbt_assets,
-)
+from .assets.bronze import covid19_data_rki
+from .assets.dbt import dbt_assets
+from .assets.output import cases_histogram
 from .project import local_dagster
 from .schedules import schedules
 
 defs = Definitions(
-    assets=[dbt_assets, area1, covid19_data_rki, cases_histogram],
-    asset_checks=[area1_label_check],
+    assets=[dbt_assets, covid19_data_rki, cases_histogram],
     schedules=schedules,
     # In Dagster, Resources are the external services, tools, and storage backends
     # you need to do your job. For the storage backend in this project, we'll use DuckDB
