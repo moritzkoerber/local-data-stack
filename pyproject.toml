@@ -10,6 +10,7 @@ dependencies = [
     "dagster-duckdb>=0.26.19",
     "dbt-core>=1.9.4",
     "dbt-duckdb>=1.9.3",
+    "deltalake>=1.1.4",
     "duckdb>=1.2.2",
     "plotly[express]>=6.1.2",
     "polars[pyarrow]>=1.30.0",
