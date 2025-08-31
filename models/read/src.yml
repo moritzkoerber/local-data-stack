@@ -11,6 +11,6 @@ sources:
           dagster:
             asset_key: ["bronze", "covid19_data_rki"]
         columns:
-          - name: "meta.lastUpdate"
+          - name: "cases"
             tests:
               - not_null
