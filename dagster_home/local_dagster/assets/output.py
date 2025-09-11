@@ -14,12 +14,12 @@ from .dbt import dbt_assets
 
 
 @asset(
-    compute_kind="python",
-    deps=[get_asset_key_for_model([dbt_assets], "write")],
+    kinds={"python"},
+    deps=[get_asset_key_for_model([dbt_assets], "gold_covid")],
 )
 def cases_histogram(context: AssetExecutionContext, duckdb: DuckDBResource) -> None:
     with duckdb.get_connection() as conn:
-        cases = conn.sql("select * from write").pl()
+        cases = conn.sql("select * from gold_covid").pl()
 
         fig = px.histogram(cases, x="cases")
         fig.update_layout(bargap=0.2)
@@ -27,8 +27,6 @@ def cases_histogram(context: AssetExecutionContext, duckdb: DuckDBResource) -> N
         save_chart_path = Path(duckdb.database).parent.joinpath("cases_chart.html")
         fig.write_html(save_chart_path, auto_open=True)
 
-        # Tell Dagster about the location of the HTML file,
-        # so it's easy to access from the Dagster UI
         context.add_output_metadata(
             {"plot_url": MetadataValue.url(f"file://{os.fspath(save_chart_path)}")}
         )

@@ -1,6 +1,4 @@
-from dagster import (
-    AssetExecutionContext,
-)
+from dagster import AssetExecutionContext
 from dagster_dbt import DbtCliResource, dbt_assets
 
 from ..project import local_dagster

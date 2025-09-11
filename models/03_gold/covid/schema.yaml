@@ -1,6 +1,7 @@
 models:
   - name: gold_covid
     description: "unified COVID data"
+    materialized: table
     columns:
       - name: meta_lastupdate
         description: "The primary key for this table"

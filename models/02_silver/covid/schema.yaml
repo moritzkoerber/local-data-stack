@@ -1,6 +1,9 @@
 models:
   - name: silver_covid
     description: "standardized COVID data"
+    data_tests:
+      - dbt_utils.expression_is_true:
+          expression: "count(*) > 0"
     columns:
       - name: meta_lastupdate
         description: "The primary key for this table"

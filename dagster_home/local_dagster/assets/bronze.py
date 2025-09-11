@@ -4,7 +4,11 @@ from dagster import asset
 from deltalake.exceptions import TableNotFoundError
 
 
-@asset(group_name="bronze", key_prefix=["bronze"])
+@asset(
+    group_name="bronze",
+    key_prefix=["bronze"],
+    kinds={"python"},
+)
 def covid19_data_rki() -> None:
     response = requests.get("https://api.corona-zahlen.org/germany", timeout=180)
     df = pl.json_normalize(response.json())
