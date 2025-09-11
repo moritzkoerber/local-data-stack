@@ -16,8 +16,3 @@ clean-targets:
 
 flags:
   send_anonymous_usage_stats: false
-
-models:
-  duckdb:
-    read:
-      +materialized: view
