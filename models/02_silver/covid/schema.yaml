@@ -1,6 +1,9 @@
 models:
   - name: silver_covid
     description: "standardized COVID data"
+    meta:
+      dagster:
+        group: silver
     data_tests:
       - dbt_expectations.expect_table_row_count_to_be_between:
           arguments:

@@ -1,7 +1,9 @@
 models:
   - name: gold_covid
     description: "unified COVID data"
-    materialized: table
+    meta:
+      dagster:
+        group: gold
     data_tests:
       - dbt_expectations.expect_table_row_count_to_be_between:
           arguments:
