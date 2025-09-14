@@ -15,6 +15,8 @@ from .dbt import dbt_assets
 
 @asset(
     kinds={"python"},
+    group_name="presentation",
+    key_prefix=["presentation"],
     deps=[get_asset_key_for_model([dbt_assets], "gold_covid")],
 )
 def cases_barchart(context: AssetExecutionContext, duckdb: DuckDBResource) -> None:
