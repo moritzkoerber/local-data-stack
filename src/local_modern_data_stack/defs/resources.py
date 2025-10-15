@@ -11,8 +11,4 @@ dbt_resource = DbtCliResource(project_dir=dbt_project)
 
 @dg.definitions
 def resources() -> dg.Definitions:
-    return dg.Definitions(
-        resources={
-            "dbt": dbt_resource,
-        }
-    )
+    return dg.Definitions(resources={"dbt": dbt_resource})
