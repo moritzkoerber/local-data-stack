@@ -4,6 +4,8 @@ making them available to Dagster tools like the UI and CLI. It is the entry poin
 Dagster will load when deploying your code location.
 """
 
+from pathlib import Path
+
 from dagster import Definitions
 from dagster_dbt import DbtCliResource
 from dagster_duckdb import DuckDBResource
@@ -20,9 +22,9 @@ defs = Definitions(
     schedules=schedules,
     jobs=[all_assets_job],
     # In Dagster, Resources are the external services, tools, and storage backends
-    # you need to do your job. For the storage backend in this project, we'll use DuckDB
+    # you need to do your job.
     resources={
         "dbt": DbtCliResource(project_dir=dbt_project),
-        "duckdb": DuckDBResource(database="../db.duckdb"),
+        "duckdb": DuckDBResource(database=str(Path() / "data/db.duckdb")),
     },
 )
