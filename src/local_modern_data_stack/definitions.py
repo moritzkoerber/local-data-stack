@@ -25,6 +25,7 @@ defs = Definitions(
     # you need to do your job.
     resources={
         "dbt": DbtCliResource(project_dir=dbt_project),
+        # required for the presentation layer assets
         "duckdb": DuckDBResource(database=str(Path() / "data/db.duckdb")),
     },
 )

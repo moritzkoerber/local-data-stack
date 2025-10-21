@@ -1,6 +1,6 @@
 models:
   - name: silver_covid
-    description: "standardized COVID data"
+    description: "Silver Layer Table for COVID Data"
     meta:
       dagster:
         group: silver

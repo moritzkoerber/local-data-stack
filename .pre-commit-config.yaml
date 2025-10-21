@@ -39,5 +39,4 @@ repos:
     rev: 0.0.1
     hooks:
       - id: pyrefly-typecheck-system
-        name: Pyrefly (type checking)
         pass_filenames: false

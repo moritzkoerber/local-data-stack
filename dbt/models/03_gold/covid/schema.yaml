@@ -1,6 +1,6 @@
 models:
   - name: gold_covid
-    description: "unified COVID data"
+    description: "Gold Layer Table for COVID Data"
     meta:
       dagster:
         group: gold
