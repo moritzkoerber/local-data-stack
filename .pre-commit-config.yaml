@@ -25,15 +25,15 @@ repos:
       - id: sqlfluff-lint
         additional_dependencies:
           ["dbt-duckdb", "sqlfluff-templater-dbt", "deltalake[pyarrow]"]
+        entry: bash -c 'cd dbt && sqlfluff lint'
         args:
           - --dialect
           - duckdb
+          - --verbose
       - id: sqlfluff-fix
         additional_dependencies:
           ["dbt-duckdb", "sqlfluff-templater-dbt", "deltalake[pyarrow]"]
-        args:
-          - --dialect
-          - duckdb
+        entry: bash -c 'cd dbt && sqlfluff fix --verbose --dialect duckdb'
 
   - repo: https://github.com/facebook/pyrefly-pre-commit
     rev: 0.0.1
