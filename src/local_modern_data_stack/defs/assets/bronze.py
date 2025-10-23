@@ -3,11 +3,14 @@ import requests
 from dagster import asset
 from deltalake.exceptions import TableNotFoundError
 
+from .partitions import daily_partition
+
 
 @asset(
     group_name="bronze",
     key_prefix=["bronze"],
     kinds={"python"},
+    partitions_def=daily_partition,
 )
 def covid19_data_rki() -> None:
     response = requests.get("https://api.corona-zahlen.org/germany", timeout=180)

@@ -11,16 +11,16 @@ from dagster_dbt import DbtCliResource
 from dagster_duckdb import DuckDBResource
 
 from .defs.assets.bronze import covid19_data_rki
-from .defs.assets.dbt import dbt_models
+from .defs.assets.dbt import dbt_full_models, incremental_dbt_models
 from .defs.assets.presentation import cases_barchart
-from .defs.jobs import all_assets_job
+from .defs.jobs import full_load, partitioned_asset_job
 from .defs.resources import dbt_project
 from .schedules import schedules
 
 defs = Definitions(
-    assets=[dbt_models, covid19_data_rki, cases_barchart],
+    assets=[covid19_data_rki, dbt_full_models, incremental_dbt_models, cases_barchart],
     schedules=schedules,
-    jobs=[all_assets_job],
+    jobs=[full_load, partitioned_asset_job],
     # In Dagster, Resources are the external services, tools, and storage backends
     # you need to do your job.
     resources={
