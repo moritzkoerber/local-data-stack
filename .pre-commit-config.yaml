@@ -20,7 +20,7 @@ repos:
         args: [-d, "{rules: {document-start: disable}}"]
 
   - repo: https://github.com/sqlfluff/sqlfluff
-    rev: 3.5.0
+    rev: 4.0.0a1
     hooks:
       - id: sqlfluff-lint
         additional_dependencies:
