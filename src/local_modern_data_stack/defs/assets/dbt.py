@@ -1,6 +1,6 @@
 import json
 
-from dagster import AssetExecutionContext
+from dagster import AssetExecutionContext, BackfillPolicy
 from dagster_dbt import DbtCliResource, dbt_assets
 
 from ..resources import dbt_project
@@ -13,6 +13,7 @@ INCREMENTAL_SELECTOR = "config.materialized:incremental"
     manifest=dbt_project.manifest_path,
     select=INCREMENTAL_SELECTOR,
     partitions_def=daily_partition,
+    backfill_policy=BackfillPolicy.single_run(),
 )
 def incremental_dbt_models(context: AssetExecutionContext, dbt: DbtCliResource):
     time_window = context.partition_time_window

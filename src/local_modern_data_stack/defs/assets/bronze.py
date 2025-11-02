@@ -1,6 +1,6 @@
 import polars as pl
 import requests
-from dagster import AssetExecutionContext, asset
+from dagster import AssetExecutionContext, BackfillPolicy, asset
 from deltalake.exceptions import TableNotFoundError
 
 from .partitions import daily_partition
@@ -11,6 +11,7 @@ from .partitions import daily_partition
     key_prefix=["bronze"],
     kinds={"python"},
     partitions_def=daily_partition,
+    backfill_policy=BackfillPolicy.single_run(),
 )
 def raw_xetra(context: AssetExecutionContext) -> None:
     start, end = context.partition_time_window
