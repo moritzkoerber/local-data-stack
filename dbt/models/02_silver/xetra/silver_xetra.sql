@@ -1,29 +1,19 @@
 {{ config(
     materialized = 'incremental',
-    incremental_strategy = 'append',
+    incremental_strategy = 'delete+insert',
+    unique_key = 'trading_day',
     on_schema_change = 'fail'
 ) }}
 
-WITH src AS (
-    SELECT
-        CAST(trading_day AS TIMESTAMP) AS trading_day,
-        "1. open" AS opening_price,
-        "2. high" AS highest_price,
-        "3. low" AS lowest_price,
-        "4. close" AS closing_price,
-        "5. volume" AS trade_volume
-    FROM {{ source("stocks", "xetra") }}
-    {% if is_incremental() %}
-        WHERE
-            CAST(trading_day AS TIMESTAMP)
-            > (
-                SELECT
-                    COALESCE(
-                        MAX(t.trading_day), TIMESTAMP '1900-01-01 00:00:00'
-                    )
-                FROM {{ this }} AS t
-            )
-    {% endif %}
-)
 
-SELECT * FROM src
+SELECT
+    CAST(trading_day AS TIMESTAMP) AS trading_day,
+    CAST("1. open" AS FLOAT) AS opening_price,
+    CAST("2. high" AS FLOAT) AS highest_price,
+    CAST("3. low" AS FLOAT) AS lowest_price,
+    CAST("4. close" AS FLOAT) AS closing_price,
+    CAST("5. volume" AS FLOAT) AS trade_volume
+FROM {{ source("stocks", "xetra") }}
+{% if is_incremental() %}
+    WHERE trading_day >= '{{ var('start_date') }}' AND trading_day < '{{ var('end_date') }}'
+{% endif %}

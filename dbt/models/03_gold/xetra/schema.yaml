@@ -9,7 +9,7 @@ models:
           arguments:
             min_value: 1
     columns:
-      - name: date
+      - name: trading_date
         description: "The primary key for this table"
         data_tests:
           - unique
