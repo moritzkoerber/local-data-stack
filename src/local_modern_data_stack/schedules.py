@@ -1,8 +1,3 @@
-"""
-This module defines schedules for automatically running Dagster jobs, such as
-materializing dbt models at specified times.
-"""
-
 from dagster import (
     DefaultScheduleStatus,
     build_schedule_from_partitioned_job,

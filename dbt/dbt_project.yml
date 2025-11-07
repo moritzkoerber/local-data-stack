@@ -1,4 +1,4 @@
-name: "duckdb"
+name: "duckdb" # TODO: Change
 version: "1.0.0"
 
 profile: "duckdb"

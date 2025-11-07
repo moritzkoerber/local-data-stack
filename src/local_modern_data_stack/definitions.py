@@ -1,9 +1,3 @@
-"""
-This file centralizes the definitions of your Dagster assets, schedules, and resources,
-making them available to Dagster tools like the UI and CLI. It is the entry point that
-Dagster will load when deploying your code location.
-"""
-
 from pathlib import Path
 
 from dagster import Definitions
@@ -25,11 +19,8 @@ defs = Definitions(
     ],
     schedules=schedules,
     jobs=[partitioned_asset_job],
-    # In Dagster, Resources are the external services, tools, and storage backends
-    # you need to do your job.
     resources={
         "dbt": DbtCliResource(project_dir=dbt_project),
-        # required for the presentation layer assets
         "duckdb": DuckDBResource(database=str(Path() / "data/db.duckdb")),
     },
 )

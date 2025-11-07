@@ -1,6 +1,15 @@
 import json
+from typing import Iterator
 
-from dagster import AssetExecutionContext, BackfillPolicy
+from dagster import (
+    AssetCheckEvaluation,
+    AssetCheckResult,
+    AssetExecutionContext,
+    AssetMaterialization,
+    AssetObservation,
+    BackfillPolicy,
+    Output,
+)
 from dagster_dbt import DbtCliResource, dbt_assets
 
 from ..resources import dbt_project
@@ -15,7 +24,15 @@ INCREMENTAL_SELECTOR = "config.materialized:incremental"
     partitions_def=daily_partition,
     backfill_policy=BackfillPolicy.single_run(),
 )
-def incremental_dbt_models(context: AssetExecutionContext, dbt: DbtCliResource):
+def incremental_dbt_models(
+    context: AssetExecutionContext, dbt: DbtCliResource
+) -> Iterator[
+    Output
+    | AssetMaterialization
+    | AssetObservation
+    | AssetCheckResult
+    | AssetCheckEvaluation
+]:
     time_window = context.partition_time_window
     dbt_vars = {
         "start_date": time_window.start.strftime("%Y-%m-%d"),

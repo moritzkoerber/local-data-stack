@@ -1,9 +1,13 @@
+import logging
+
 import polars as pl
 import requests
 from dagster import AssetExecutionContext, BackfillPolicy, asset
 from deltalake.exceptions import TableNotFoundError
 
 from .partitions import daily_partition
+
+logger = logging.getLogger(__name__)
 
 
 @asset(
@@ -14,8 +18,17 @@ from .partitions import daily_partition
     backfill_policy=BackfillPolicy.single_run(),
 )
 def raw_xetra(context: AssetExecutionContext) -> None:
+    """
+    Fetches raw XETRA stock data from Alpha Vantage API and stores it in Delta Lake format.
+    The asset is partitioned by day and merges new data with existing records.
+
+    Args:
+        context (AssetExecutionContext): The execution context provided by
+            Dagster, containing partition information and logging capabilities.
+    """
     start, end = context.partition_time_window
-    print(f"Processing XETRA data from {start} to {end}")
+    logger.debug("Processing XETRA data from %s to %s", start, end)
+
     response = requests.get(
         "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MBG.DEX&outputsize=full&apikey=demo",
         timeout=180,
@@ -29,8 +42,6 @@ def raw_xetra(context: AssetExecutionContext) -> None:
             closed="left",
         )
     )
-    print(f"Got {df.shape}")
-    print(df.head())
 
     try:
         df.write_delta(
