@@ -5,7 +5,7 @@ from .defs.assets.dbt import incremental_dbt_models
 from .defs.assets.presentation import xetra_closing_price_plot
 from .defs.jobs import partitioned_asset_job
 from .defs.resources import dbt_resource, duckdb_resource
-from .schedules import schedules
+from .defs.schedules import schedules
 
 defs = Definitions(
     assets=[

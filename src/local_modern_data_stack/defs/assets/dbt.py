@@ -1,5 +1,5 @@
 import json
-from typing import Iterator
+from collections.abc import Iterator
 
 from dagster import (
     AssetCheckEvaluation,
@@ -12,8 +12,8 @@ from dagster import (
 )
 from dagster_dbt import DbtCliResource, dbt_assets
 
+from ..partitions import daily_partition
 from ..resources import dbt_project
-from .partitions import daily_partition
 
 INCREMENTAL_SELECTOR = "config.materialized:incremental"
 
