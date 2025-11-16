@@ -53,7 +53,6 @@ directory_type = "project"
 
 [tool.dg.project]
 root_module = "local_modern_data_stack"
-registry_modules = ["local_modern_data_stack.components.*"]
 
 [tool.sqlfluff.core]
 dialect = "duckdb"
