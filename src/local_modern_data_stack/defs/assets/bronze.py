@@ -5,7 +5,7 @@ import requests
 from dagster import AssetExecutionContext, BackfillPolicy, asset
 from deltalake.exceptions import TableNotFoundError
 
-from ..partitions import daily_partition
+from local_modern_data_stack.defs.partitions import daily_partition
 
 logger = logging.getLogger(__name__)
 

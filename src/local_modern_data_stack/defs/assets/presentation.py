@@ -5,7 +5,7 @@ from dagster import asset
 from dagster_dbt import get_asset_key_for_model
 from dagster_duckdb import DuckDBResource
 
-from .dbt import incremental_dbt_models
+from local_modern_data_stack.defs.assets.dbt import incremental_dbt_models
 
 
 @asset(

@@ -1,11 +1,11 @@
 from dagster import Definitions
 
-from .defs.assets.bronze import raw_xetra
-from .defs.assets.dbt import incremental_dbt_models
-from .defs.assets.presentation import xetra_closing_price_plot
-from .defs.jobs import partitioned_asset_job
-from .defs.resources import dbt_resource, duckdb_resource
-from .defs.schedules import schedules
+from local_modern_data_stack.defs.assets.bronze import raw_xetra
+from local_modern_data_stack.defs.assets.dbt import incremental_dbt_models
+from local_modern_data_stack.defs.assets.presentation import xetra_closing_price_plot
+from local_modern_data_stack.defs.jobs import partitioned_asset_job
+from local_modern_data_stack.defs.resources import dbt_resource, duckdb_resource
+from local_modern_data_stack.defs.schedules import schedules
 
 defs = Definitions(
     assets=[
