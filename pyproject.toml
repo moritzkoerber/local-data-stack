@@ -43,6 +43,7 @@ select = [
     "ANN", # function annotations
     "B",   # bugbear
     "A",   # built-ins
+    "ISC", # implicit string concatenation
 ]
 
 [tool.ruff.lint.flake8-annotations]
@@ -52,7 +53,7 @@ suppress-none-returning = true
 directory_type = "project"
 
 [tool.dg.project]
-root_module = "local_modern_data_stack"
+root_module = "local_data_stack"
 
 [tool.sqlfluff.core]
 dialect = "duckdb"
