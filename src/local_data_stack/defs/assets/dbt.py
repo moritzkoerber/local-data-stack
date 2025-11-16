@@ -12,8 +12,8 @@ from dagster import (
 )
 from dagster_dbt import DbtCliResource, dbt_assets
 
-from local_modern_data_stack.defs.partitions import daily_partition
-from local_modern_data_stack.defs.resources import dbt_project
+from local_data_stack.defs.partitions import daily_partition
+from local_data_stack.defs.resources import dbt_project
 
 INCREMENTAL_SELECTOR = "config.materialized:incremental"
 

@@ -3,7 +3,7 @@ from dagster import (
     build_schedule_from_partitioned_job,
 )
 
-from local_modern_data_stack.defs.jobs import partitioned_asset_job
+from local_data_stack.defs.jobs import partitioned_asset_job
 
 partitioned_asset_job_schedule = build_schedule_from_partitioned_job(
     job=partitioned_asset_job,
