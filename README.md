@@ -1,6 +1,6 @@
 # Local data stack
 
-This project demos how to integrate duckdb and delta lake into dbt orchestrated by Dagster. The stack once per day queries data from a stock exchange (Xetra) through an API and does an incremental load into a medallion architecture. Finally, a simply line chart is created via Plotly. Overview:
+This project demos how to integrate duckdb and delta lake with dbt, orchestrated by Dagster. The stack once per day queries data from a stock exchange (Xetra) through an API and does an incremental load into a medallion architecture. Finally, a simply line chart is created via Plotly. Overview:
 
 ![Overview](docs/img/overview.png)
 
