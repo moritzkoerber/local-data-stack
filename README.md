@@ -6,4 +6,4 @@ This project demos how to integrate DuckDB and Delta Lake with dbt, orchestrated
 
 ## How to run
 
-Simply run `$ uv run dg dev` to launch the dagster webserver.
+The stack uses [uv](https://docs.astral.sh/uv/getting-started/installation/) to manage its dependencies. Simply run `uv run dg dev` to launch the dagster webserver.
