@@ -1,0 +1,4 @@
+python_logs:
+  managed_python_loggers:
+    - local_data_stack.defs.assets.bronze
+  python_log_level: DEBUG
