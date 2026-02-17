@@ -44,6 +44,8 @@ select = [
     "B",   # bugbear
     "A",   # built-ins
     "ISC", # implicit string concatenation
+    "S",   # bandit
+    "UP",  # pyupgrade
 ]
 
 [tool.ruff.lint.flake8-annotations]
