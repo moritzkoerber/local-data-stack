@@ -8,7 +8,7 @@ repos:
       - id: check-yaml
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.15.1
+    rev: v0.15.7
     hooks:
       - id: ruff-check
       - id: ruff-format
@@ -32,13 +32,18 @@ repos:
         entry: bash -c 'cd dbt && sqlfluff fix --dialect duckdb'
 
   - repo: https://github.com/facebook/pyrefly-pre-commit
-    rev: 0.52.0
+    rev: 0.57.1
     hooks:
       - id: pyrefly-check
         pass_filenames: false
         language: system
 
   - repo: https://github.com/rvben/rumdl-pre-commit
-    rev: v0.1.22
+    rev: v0.1.58
     hooks:
       - id: rumdl-fmt
+
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.10.12
+    hooks:
+      - id: uv-lock
