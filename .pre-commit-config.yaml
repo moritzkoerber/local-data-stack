@@ -8,7 +8,7 @@ repos:
       - id: check-yaml
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.15.7
+    rev: v0.15.10
     hooks:
       - id: ruff-check
       - id: ruff-format
@@ -19,31 +19,38 @@ repos:
       - id: yamllint
         args: [-d, "{rules: {document-start: disable}}"]
 
-  - repo: https://github.com/sqlfluff/sqlfluff
-    rev: 4.0.4
+  - repo: https://github.com/tconbeer/sqlfmt
+    rev: v0.29.0
     hooks:
-      - id: sqlfluff-lint
-        additional_dependencies:
-          ["dbt-duckdb", "sqlfluff-templater-dbt", "deltalake[pyarrow]"]
-        entry: bash -c 'cd dbt && sqlfluff lint --dialect duckdb'
+      - id: sqlfmt
+        language_version: python
+        additional_dependencies: [".[jinjafmt]"]
+
+  - repo: https://github.com/sqlfluff/sqlfluff
+    rev: 4.1.0
+    hooks:
       - id: sqlfluff-fix
         additional_dependencies:
           ["dbt-duckdb", "sqlfluff-templater-dbt", "deltalake[pyarrow]"]
         entry: bash -c 'cd dbt && sqlfluff fix --dialect duckdb'
+      - id: sqlfluff-lint
+        additional_dependencies:
+          ["dbt-duckdb", "sqlfluff-templater-dbt", "deltalake[pyarrow]"]
+        entry: bash -c 'cd dbt && sqlfluff lint --dialect duckdb'
 
   - repo: https://github.com/facebook/pyrefly-pre-commit
-    rev: 0.57.1
+    rev: 0.60.0
     hooks:
       - id: pyrefly-check
         pass_filenames: false
         language: system
 
   - repo: https://github.com/rvben/rumdl-pre-commit
-    rev: v0.1.58
+    rev: v0.1.68
     hooks:
       - id: rumdl-fmt
 
   - repo: https://github.com/astral-sh/uv-pre-commit
-    rev: 0.10.12
+    rev: 0.11.6
     hooks:
       - id: uv-lock

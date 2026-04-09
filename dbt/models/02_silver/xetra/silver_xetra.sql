@@ -1,20 +1,22 @@
-{{ config(
-    materialized = 'incremental',
-    incremental_strategy = 'delete+insert',
-    unique_key = 'trading_day',
-    on_schema_change = 'fail'
-) }}
+{{
+    config(
+        materialized="incremental",
+        incremental_strategy="delete+insert",
+        unique_key="trading_day",
+        on_schema_change="fail",
+    )
+}}
 
-SELECT
-    CAST(trading_day AS TIMESTAMP) AS trading_day,
-    CAST("1. open" AS FLOAT) AS opening_price,
-    CAST("2. high" AS FLOAT) AS highest_price,
-    CAST("3. low" AS FLOAT) AS lowest_price,
-    CAST("4. close" AS FLOAT) AS closing_price,
-    CAST("5. volume" AS FLOAT) AS trade_volume
-FROM {{ source("stocks", "xetra") }}
+select
+    cast(trading_day as timestamp) as trading_day,
+    cast("1. open" as float) as opening_price,
+    cast("2. high" as float) as highest_price,
+    cast("3. low" as float) as lowest_price,
+    cast("4. close" as float) as closing_price,
+    cast("5. volume" as float) as trade_volume
+from {{ source("stocks", "xetra") }}
 {% if is_incremental() %}
-    WHERE
-        trading_day >= '{{ var('start_date') }}'
-        AND trading_day < '{{ var('end_date') }}'
+    where
+        trading_day >= '{{ var("start_date") }}'
+        and trading_day < '{{ var("end_date") }}'
 {% endif %}

@@ -60,6 +60,14 @@ root_module = "local_data_stack"
 [tool.sqlfluff.core]
 dialect = "duckdb"
 templater = "dbt"
+exclude_rules = [
+    "layout.indent",
+    "layout.cte_bracket",
+    "layout.keyword_newline",
+    "layout.cte_newline",
+    "layout.select_targets",
+    "layout.spacing",
+]
 
 [tool.sqlfluff.templater.dbt]
 project_dir = "dbt"
@@ -69,11 +77,15 @@ profiles_dir = "dbt"
 start_date = "2025-10-27"
 end_date = "2025-10-28"
 
-[tool.sqlfluff.rules.capitalisation.keywords]
-capitalisation_policy = "upper"
-
-[tool.sqlfluff.rules.capitalisation.identifiers]
+[tool.sqlfluff.rules]
 capitalisation_policy = "lower"
+extended_capitalisation_policy = "lower"
+
+[tool.sqlfluff.rules.convention.terminator]
+multiline_newline = true
+
+[tool.sqlfmt]
+exclude = ["dbt/target/**/*", "dbt/dbt_packages/**/*"]
 
 [tool.pyrefly]
 project-includes = ["**/*"]
